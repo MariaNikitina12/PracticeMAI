@@ -1,8 +1,8 @@
 import time
 import random
 
-import constants as cns
-from database import DBCommunicator
+import pz.constants as cns
+from pz.database import DBCommunicator
 
 
 if __name__ == "__main__":

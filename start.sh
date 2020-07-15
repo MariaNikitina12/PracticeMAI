@@ -1,4 +1,4 @@
 #!/bin/bash
 
-python3 drawer.py &
-python3 rand_generator.py
+python3 -m pz.drawer &
+python3 -m pz.task3

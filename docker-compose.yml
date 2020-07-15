@@ -8,6 +8,8 @@ services:
       - /tmp/.X11-unix:/tmp/.X11-unix
     depends_on:
       - influx
+    ports:
+    - '8010:8010'
 
   influx:
     image: influxdb:latest
