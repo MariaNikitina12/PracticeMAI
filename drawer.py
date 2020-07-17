@@ -4,7 +4,7 @@ import pz.constants as cns
 
 
 if __name__ == "__main__":
-    comm = DBCommunicator(cns.DB_ADDRESS, cns.DATABASE_NAME)
+    comm = DBCommunicator('localhost', cns.DATABASE_NAME)
     draw = SingletonDrawer()
     while True:
         pts = comm.get_points(cns.MEASURE_NAME)

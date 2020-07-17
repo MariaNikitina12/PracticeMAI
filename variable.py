@@ -14,6 +14,7 @@ class Variable:
     def simulate(self, time_spend):
         if self.sim:
             self.value += (-1+2*random.random()) * self.change_per
+        return 0.2
 
 
 class TimingSimulVariable(Variable):
@@ -40,6 +41,16 @@ class MpVarMass:
         ret = f(*args, **kwargs)
         self._lc.release()
         return ret
+
+    def _set_var(self, var: Variable):
+        vr = self._vrs.copy()
+        if var.name not in vr:
+            return False
+        self._vrs[var.name] = var
+        return True
+
+    def set_var(self, var: Variable):
+        return self.lock_func(self._set_var, var)
 
     def _add_var(self, var: Variable):
         vr = self._vrs.copy()

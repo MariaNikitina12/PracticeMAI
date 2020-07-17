@@ -1,13 +1,15 @@
 from multiprocessing import Process
 
 from flask import Flask, request, jsonify
-from pz.task3.variable import TimingSimulVariable, Variable, MpVarMass, Saver
+from .variable import TimingSimulVariable, Variable, MpVarMass, Saver
+from .mqtt_var_reader import MQTTVarsManager
 from pz.database import DBCommunicator
 import pz.constants as cnst
 
 app = Flask(__name__)
 var_holder = MpVarMass()
 db = DBCommunicator(cnst.DB_ADDRESS, cnst.DATABASE_NAME)
+MQTTVarsManager.set_vmas(var_holder)
 
 
 class Const:
@@ -50,6 +52,15 @@ def add():
     freq = request.args.get("freq", 1.0)
     rng = request.args.get("rng", 2.0)
     return jsonify(req=var_holder.add_var(TimingSimulVariable(freq, name, float(bv), True, rng)))
+
+
+@app.route("/add_mosquitto/")
+def addm():
+    name = request.args.get("nm", None)
+    topic = request.args.get("tp", None)
+    if name is None or topic is None:
+        return jsonify(req="BAD PARAMS")
+    return jsonify(req=MQTTVarsManager.add_reader(name, topic, 'mqtt_cont',))
 
 
 @app.route("/rem/")

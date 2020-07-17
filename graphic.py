@@ -30,6 +30,7 @@ class Drawer:
     def pause(self):
         plt.pause(1)
 
+
 class SingletonDrawer:
     _drw = None
 
