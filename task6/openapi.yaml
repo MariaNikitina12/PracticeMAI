@@ -1,0 +1,108 @@
+openapi: 3.0.0
+info:
+  version: "1.0.1"
+  title: 6 Zadanie API
+paths:
+  /start_serv:
+    get:
+      summary: Starts writer and emulator proccessess
+      responses:
+        '200':
+          description: returns OK or not OK if started before
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  req:
+                    type: string
+  /add:
+      get:
+        summary: Add var to writer
+        parameters: 
+          - name: nm
+            in: query
+            description: name of the variable
+            required: true
+            schema:
+              type: string
+          - name: bv
+            in: query
+            description: begin value for variable
+            required: true
+            schema:
+              type: number
+          - name: freq
+            in: query
+            description: sets how many times per second'll update values
+            schema:
+              type: number
+              default: 1.0
+          - name: rng
+            in: query
+            description: max range of changing value
+            schema:
+              type: number
+              default: 2.0    
+        responses:
+          '200':
+            description: returns OK or Not ok if value exists
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    req:
+                      type: string
+  /stop_serv:
+    get:
+      summary: Stops writer and sim processess
+      responses:
+          '200':
+            description: returns OK or Not ok if value exists
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    req:
+                      type: string
+  /rem:
+    get:
+      summary: removes variable from sim
+      parameters: 
+      - name: nm
+        in: query
+        description: name of the variable
+        required: true
+        schema:
+          type: string
+      responses:
+          '200':
+            description: returns OK or Not ok if variable removed
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    req:
+                      type: string                    
+  /getall:
+    get:
+      summary: get info about all variables and their count
+      responses:
+        '200':
+          description: returns status with response code
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  arg:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties:
+                        type: number
+                  count:
+                    type: integer
