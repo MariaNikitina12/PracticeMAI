@@ -1,4 +1,4 @@
 #!/bin/bash
 
-python3 -m pz.drawer &
-python3 -m pz.task3
+python3 -m drawer &
+python3 -m task3_4_7

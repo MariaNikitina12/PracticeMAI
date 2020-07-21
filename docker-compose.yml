@@ -17,3 +17,9 @@ services:
       - '8086:8086'
     environment:
       - INFLUXDB_DB=mydb
+
+  mqtt_cont:
+    image: ansi/mosquitto
+    container_name: mosquitto
+    ports:
+      - 1883:1883

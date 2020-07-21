@@ -1,6 +1,6 @@
-from pz.database import DBCommunicator
-from pz.graphic import SingletonDrawer, ZipVar
-import pz.constants as cns
+from database import DBCommunicator
+from graphic import SingletonDrawer, ZipVar
+import constants as cns
 
 
 if __name__ == "__main__":
